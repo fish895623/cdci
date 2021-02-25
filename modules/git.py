@@ -1,19 +1,23 @@
+import os
 from subprocess import PIPE, Popen
 
 
-class git:
+class Git:
     def __init__(
         self,
         command: str,
-        exec_loc: str,
+        git_bin_loc: str = "loc",
     ):
         """
-        command: str
-            list of command
-        exec_loc: str
-            git file location
+        Arguments
+            command: str
+                list of command
+
+            git_bin_loc: str
+                git file location
         """
         self.command = command
+        self.git_bin_loc = git_bin_loc
         pass
 
     def run(self):
@@ -25,4 +29,8 @@ class git:
         )
         (stdout, stderr) = popen.communicate()
 
-        return stdout, stderr
+        returncode = popen.returncode
+
+        stdout = stdout.decode(encoding="utf-8")
+
+        return stdout, stderr, returncode
