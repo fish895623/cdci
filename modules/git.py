@@ -6,7 +6,7 @@ class Git:
     def __init__(
         self,
         command: str,
-        git_bin_loc: str = "loc",
+        git_bin_loc: str = "",
     ):
         """
         Arguments
@@ -18,6 +18,10 @@ class Git:
         """
         self.command = command
         self.git_bin_loc = git_bin_loc
+        if git_bin_loc == "":
+            pass
+        else:
+            os.environ["PATH"] = git_bin_loc + ":" + os.environ["PATH"]
         pass
 
     def run(self):
